@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pavan's Cafe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000; /* Black background */
+      color: #fff; /* White text */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin: 10px 0 0;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Menu Section */
+    .menu {
+      text-align: center;
+    }
+
+    .menu h2 {
+      font-size: 2rem;
+      color: #6a1b9a; /* Deep purple */
+    }
+
+    .menu-items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .item {
+      background-color: #1a1a1a; /* Dark gray */
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+    }
+
+    .item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .item h3 {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: #6a1b9a; /* Deep purple */
+    }
+
+    .item p {
+      font-size: 1rem;
+      color: #ccc; /* Light gray */
+    }
+
+    .item button {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .item button:hover {
+      background-color: #4a148c; /* Darker purple */
+    }
+
+    /* Cart Section */
+    .cart {
+      background-color: #1a1a1a; /* Dark gray */
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .cart h2 {
+      font-size: 1.8rem;
+      color: #6a1b9a; /* Deep purple */
+    }
+
+    #cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart-items li {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #ccc; /* Light gray */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #333;
+    }
+
+    #cart-items li button {
+      background-color: #ff4a3d;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    #cart-items li button:hover {
+      background-color: #ff2e1f;
+    }
+
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #6a1b9a; /* Deep purple */
+    }
+
+    .cart button {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cart button:hover {
+      background-color: #4a148c; /* Darker purple */
+    }
+
+    /* User Details Form */
+    .user-details {
+      background-color: #1a1a1a; /* Dark gray */
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-details h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #6a1b9a; /* Deep purple */
+    }
+
+    .user-details form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-details label {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #ccc; /* Light gray */
+    }
+
+    .user-details input,
+    .user-details textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .user-details button {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .user-details button:hover {
+      background-color: #4a148c; /* Darker purple */
+    }
+
+    /* Payment Details Section */
+    .payment-details {
+      background-color: #1a1a1a; /* Dark gray */
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .payment-details h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #6a1b9a; /* Deep purple */
+    }
+
+    .payment-details form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .payment-details label {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #ccc; /* Light gray */
+    }
+
+    .payment-details input {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .payment-details button {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .payment-details button:hover {
+      background-color: #4a148c; /* Darker purple */
+    }
+
+    /* Payment Options */
+    .payment-options {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .payment-options button {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .payment-options button:hover {
+      background-color: #4a148c; /* Darker purple */
+    }
+
+    /* Footer */
+    footer {
+      background-color: #6a1b9a; /* Deep purple */
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      width: 100%;
+      margin-top: 40px; /* Added space between cart and footer */
+    }
+
+    /* Utility Classes */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Pavan's Cafe</h1>
+    <p>Your perfect place for delicious food and drinks!</p>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Menu Section -->
+    <section class="menu">
+      <h2>Our Menu</h2>
+      <div class="menu-items">
+        <div class="item">
+          <img src="https://foodandroad.com/wp-content/uploads/2021/04/masala-chai-indian-drink-3-500x500.jpg">
+          <h3>Masala Chai</h3>
+          <p>₹30</p>
+          <button onclick="addToCart('Masala Chai', 30)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://www.itl.cat/pngfile/big/11-114707_coffee-wallpaper-high-definition-filter-coffee-images-hd.jpg" alt="Filter Coffee">
+          <h3>Filter Coffee</h3>
+          <p>₹40</p>
+          <button onclick="addToCart('Filter Coffee', 40)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxnVgCV-6sbWMQ-OaALcEztviIakZJgzo5Jg&s" alt="Samosa">
+          <h3>Samosa</h3>
+          <p>₹25</p>
+          <button onclick="addToCart('Samosa', 25)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://www.ruchikrandhap.com/wp-content/uploads/2017/09/Paneer-Corn-Spinach-Sandwich-4-1.jpg" alt="Paneer Sandwich">
+          <h3>Paneer Sandwich</h3>
+          <p>₹60</p>
+          <button onclick="addToCart('Paneer Sandwich', 60)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzJVYMvK9RwzZ5LOfGG5wjAZU1r-664As2hA&s" alt="Pav Bhaji">
+          <h3>Pav Bhaji</h3>
+          <p>₹80</p>
+          <button onclick="addToCart('Pav Bhaji', 80)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://blog.swiggy.com/wp-content/uploads/2024/11/Image-1_mumbai-vada-pav-1024x538.png" alt="Vada Pav">
+          <h3>Vada Pav</h3>
+          <p>₹20</p>
+          <button onclick="addToCart('Vada Pav', 20)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://images.hindi.news18.com/ibnkhabar/uploads/2021/06/chole-bhature.jpg" alt="Chole Bhature">
+          <h3>Chole Bhature</h3>
+          <p>₹90</p>
+          <button onclick="addToCart('Chole Bhature', 90)">Add to Cart</button>
+        </div>
+        <div class="item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3aJrkMZfZWaRkqQu36Y9TBzYlCrkKHvy7mw&s" alt="Gulab Jamun">
+          <h3>Gulab Jamun</h3>
+          <p>₹50</p>
+          <button onclick="addToCart('Gulab Jamun', 50)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart hidden">
+      <h2>Your Cart</h2>
+      <ul id="cart-items"></ul>
+      <p class="cart-total">Total: ₹<span id="cart-total">0.00</span></p>
+      <button onclick="showUserDetails()">Proceed to Checkout</button>
+    </section>
+
+    <!-- User Details Form -->
+    <section class="user-details hidden">
+      <h2>Enter Your Details</h2>
+      <form id="user-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="address">Delivery Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+        
+        <button type="button" onclick="showPaymentDetails()">Next: Payment Details</button>
+      </form>
+    </section>
+
+    <!-- Payment Details Section -->
+    <section class="payment-details hidden">
+      <h2>Payment Details</h2>
+      <div class="payment-options">
+        <button onclick="selectPayment('Cash')">Cash</button>
+        <button onclick="selectPayment('Credit Card')">Credit Card</button>
+        <button onclick="selectPayment('Phone Pay')">Phone Pay</button>
+        <button onclick="selectPayment('Google Pay')">Google Pay</button>
+      </div>
+      <form id="payment-form">
+        <div id="payment-fields"></div>
+        <button type="submit">Place Order</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Pavan's Cafe. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let cart = [];
+    let total = 0;
+    let selectedPaymentMethod = '';
+
+    // Add item to cart
+    function addToCart(itemName, itemPrice) {
+      const existingItem = cart.find(item => item.name === itemName);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+      }
+      total += itemPrice;
+      updateCart();
+      document.querySelector('.cart').classList.remove('hidden');
+    }
+
+    // Update cart display
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      
+      cartItems.innerHTML = '';
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          ${item.name} (${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItems.appendChild(li);
+      });
+
+      cartTotal.textContent = total.toFixed(2);
+    }
+
+    // Remove item from cart
+    function removeFromCart(index) {
+      const removedItem = cart.splice(index, 1)[0];
+      total -= removedItem.price * removedItem.quantity;
+      updateCart();
+      if (cart.length === 0) {
+        document.querySelector('.cart').classList.add('hidden');
+      }
+    }
+
+    // Show user details form
+    function showUserDetails() {
+      document.querySelector('.cart').classList.add('hidden');
+      document.querySelector('.user-details').classList.remove('hidden');
+    }
+
+    // Show payment details form
+    function showPaymentDetails() {
+      document.querySelector('.user-details').classList.add('hidden');
+      document.querySelector('.payment-details').classList.remove('hidden');
+    }
+
+    // Select payment method
+    function selectPayment(method) {
+      selectedPaymentMethod = method;
+      const paymentFields = document.getElementById('payment-fields');
+      paymentFields.innerHTML = '';
+
+      if (method === 'Credit Card') {
+        paymentFields.innerHTML = `
+          <label for="card-number">Card Number:</label>
+          <input type="text" id="card-number" name="card-number" required>
+          
+          <label for="expiry-date">Expiry Date:</label>
+          <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+          
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" name="cvv" required>
+        `;
+      } else if (method === 'Phone Pay' || method === 'Google Pay') {
+        paymentFields.innerHTML = `
+          <label for="upi-id">UPI ID:</label>
+          <input type="text" id="upi-id" name="upi-id" required>
+        `;
+      }
+    }
+
+    // Flirty messages array
+    const flirtyMessages = [
+      "I LOVE YOU THE MOST💓",
+      "Your order is on its way, just like my heart is racing for you! 💓",
+      "Thanks for ordering! You're sweeter than our Gulab Jamun. 😘",
+      "Your food is coming, but my thoughts are already with you. 😉",
+      "We're preparing your order with extra love, just for you! 💖",
+      "You're the chai to my biscuit! Thanks for ordering. 😍",
+    ];
+
+    // Handle payment form submission
+    document.getElementById('payment-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+
+      // Random flirty message
+      const randomMessage = flirtyMessages[Math.floor(Math.random() * flirtyMessages.length)];
+
+      // Order confirmation message
+      let paymentMessage = `Payment Method: ${selectedPaymentMethod}`;
+      if (selectedPaymentMethod === 'Credit Card') {
+        const cardNumber = document.getElementById('card-number').value;
+        paymentMessage += `\nCard Number: ${cardNumber}`;
+      } else if (selectedPaymentMethod === 'Phone Pay' || selectedPaymentMethod === 'Google Pay') {
+        const upiId = document.getElementById('upi-id').value;
+        paymentMessage += `\nUPI ID: ${upiId}`;
+      }
+
+      alert(`Thank you, ${name}! Your order has been placed.\nWe will deliver to ${address}.\nTotal: ₹${total.toFixed(2)}\n${paymentMessage}\n\n${randomMessage}`);
+
+      // Reset cart and forms
+      cart = [];
+      total = 0;
+      updateCart();
+      document.querySelector('.payment-details').classList.add('hidden');
+      document.querySelector('.menu').classList.remove('hidden');
+      document.getElementById('user-form').reset();
+      document.getElementById('payment-form').reset();
+    });
+  </script>
+</body>
+</html>
